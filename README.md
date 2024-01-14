@@ -39,6 +39,9 @@ It can be executed with the following options (default values in parentheses).
 
 ### Command examples
 
+After preparing some figures, run the following command or script.
+A sample script including preparation is [sampleScript.m](https://github.com/kimushun1101/resizeAndArrangeFigures/blob/main/sampleScript.m).
+
 Basic
 ```
 resizeAndArrangeFigures
@@ -67,7 +70,6 @@ resizeAndArrangeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir='fig'
 ```
 Exported figure settings
 ```
-% Prepare some figures. 
 params.LineWidth = 5;
 params.MarkerSize = 30;
 resizeAndArrangeFigures(ExportParams=params)
