@@ -1,35 +1,48 @@
 function resizeAndArrangeFigures(options)
-% RESIZEANDARRANGEFIGURES(options)  Resize and arrange the figure in a grid to fit the display.
+%  RESIZEANDARRANGEFIGURES resizeAndArrangeFigures(options) resize and arrange the figure in a grid to 
+% fit the display.
+%% ARGUMENTS
+% options: 
+%% 
+% * |Figures: Array of figures to be applied.|
+% * |Division: Number of horizontal and vertical divisions.|
+% * |Monitor: Monitor number to display.|
+% * |ExportDir: Save figures into ExportDir, if ExportDir is not "Display only".|
+% * |ExportParams: export figures' parameters.|
+%% EXAMPLES
+% One line examples:
+%%
+% 
+%   >> % Prepare some figures. 
+%   >> resizeAndArrangeFigures
+%   >> resizeAndArrangeFigures()
+%   >> resizeAndArrangeFigures(Figures=figs)
+%   >> resizeAndArrangeFigures(Division=[4,3])
+%   >> resizeAndArrangeFigures(Monitor=2)
+%   >> resizeAndArrangeFigures(ExportDir='fig')
+%   >> resizeAndArrangeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir='fig')
 %
-% ARGUMENTS:
-%     options:
-%          - Figures: Array of figures to be applied.
-%          - Division: Number of rows and columns to divide.
-%          - Monitor: Monitor number to display.
-%          - ExportParams: export figures' parameters.
-%          - ExportDir: Save figures into ExportDir, if ExportDir is not "Display only".
+%% 
+% Setting ExportParams example:
+%%
+% 
+%   >> % Prepare some figures. 
+%   >> params.LineWidth = 5;
+%   >> params.MarkerSize = 30;
+%   >> resizeAndArrangeFigures(ExportParams=params)
 %
-% EXAMPLE:
-%     % Prepare some figures.
-%     resizeAndArrangeFigures()
-%     resizeAndArrangeFigures(Figures=figs)
-%     resizeAndArrangeFigures(Division=[4,3])
-%     resizeAndArrangeFigures(Monitor=2)
-%     resizeAndArrangeFigures(ExportDir='fig')
-%     resizeAndArrangeFigures(Figures=figs, Division=[4,3], Display=2, ExportDir='fig')
-%     
-%     params.LineWidth = 5;
-%     params.MarkerSize = 30;
-%     resizeAndArrangeFigures(ExportParams=params)
-
+%% 
+% Sample script is <./sampleScript.m sampleScript.m> or <./sampleLiveScript.mlx 
+% sampleLiveScript.mlx>
+%% Website
+% GitHub : <https://github.com/kimushun1101/resizeAndArrangeFigures https://github.com/kimushun1101/resizeAndArrangeFigures>
 arguments
     options.Figures (1,:) matlab.ui.Figure = matlab.ui.Figure.empty()
     options.Division (1,2) {mustBeNumeric} = [3, 2] % horizontal, vertical
     options.Monitor (1,1) {mustBeNumeric} = 1 % to use second display
-    options.ExportParams (1,1) struct = struct()
     options.ExportDir (1,1) string = "Display only"
+    options.ExportParams (1,1) struct = struct()
 end
-
 %% For default arguments
 % Set Figures
 if numel(options.Figures) > 0
@@ -40,7 +53,7 @@ else
     [~, sortedIndices] = sort(arrayfun(@(f) f.Number, notEmptyFigures));
     figures = notEmptyFigures(sortedIndices);
 end
-
+%% 
 % Check Display Number
 DisplayNumMax = size(groot().MonitorPositions, 1);
 if DisplayNumMax < options.Monitor
@@ -48,15 +61,16 @@ if DisplayNumMax < options.Monitor
     warning('resizeAndArrangeFigures:incorrectNumber', ...
         "Display %d is not recognized. " + ...
         "Instead, figures are arranged on Display %d.", ...
+        "If you change the monitor connection after starting MATLAB, restart MATLAB." + ...
         options.Monitor, DisplayNumMax);
 else
     DisplayNum = options.Monitor;
 end
-
+%% 
 % Set ExportParams
 ExportParams = options.ExportParams;
 fields = {'WidthPx', 'FontSize', 'FontName', 'LineWidth', 'MarkerSize'};
-values = {3.5 * 96, 8.0, 'Times New Roman', 1.0, 10}; % Basically follows IEEE format
+values = {3.5 * 96, 10.0, 'Times New Roman', 1.5, 10}; % Basically follows IEEE format
 for i = 1:numel(fields)
     if ~isfield(ExportParams, fields{i})
         ExportParams.(fields{i}) = values{i};
@@ -66,10 +80,9 @@ UnsupportedParams = setdiff(fieldnames(ExportParams), fields);
 if ~isempty(UnsupportedParams)
    warning('resizeAndArrangeFigures:ParamsNotSupported', ...
            "ExportParams [%s]: Not supported currently. " + ...
-           "If you have any requests, please contact us via github issues.", ...
+           "If you have any requests, please contact us via GitHub issues.", ...
            strjoin(string(cell2mat(UnsupportedParams)), ', '));
 end
-
 %% For setting parameters
 % Calculate positions
 positionOffset = [30 -30 0 0];
@@ -83,8 +96,8 @@ positions(:,1) = repmat((0:divNum(1)-1).*MonitorSize(3)/divNum(1) + MonitorSize(
 positions(:,2) = repelem((divNum(2)-1:-1:0).*MonitorSize(4)/divNum(2) + MonitorSize(2) + HighDecrease, 1, divNum(1))';
 positions(:,3) = repmat(MonitorSize(3)/divNum(1), [1, figureNumber])';
 positions(:,4) = repmat(MonitorSize(4)/divNum(2), [1, figureNumber])';
-
-% Calculate Scaling
+%% 
+% Calculate scaling
 scaleRate = positions(1,3)/ExportParams.WidthPx;
 FigureParams = ExportParams;
 for i = 1:numel(fields)
@@ -93,7 +106,8 @@ for i = 1:numel(fields)
         FigureParams.(fields{i}) = scaleRate * ExportParamsValue;
     end
 end
-    
+%% 
+% Set figures parameters
 for NumFig = 1:numel(figures)
     figure_ = figures(NumFig);
     % Set figure Children (axes or legend)
@@ -132,19 +146,16 @@ for NumFig = 1:numel(figures)
             legend_.Interpreter = 'latex';
         end
     end
-
     % Skip figures in LiveScripts
     if strcmp(figure_.Tag, 'EmbeddedFigure_Internal')
         continue
     end
-
     % Set Position
     if NumFig < figureNumber
         figure_.OuterPosition = positions(NumFig,:);
     else
         figure_.OuterPosition = positions(end,:) + positionOffset*(NumFig - figureNumber);
     end
-
     % Export PDF
     if strcmp(options.ExportDir, "Display only")
         continue
