@@ -21,18 +21,18 @@ resizeAndArrangeFigures
 ### Option settings
 It can be executed with the following options (default values in parentheses).
 
-- Figures (All figures) : Array of figures to be applied.
-- Division ([3, 2]) : Number of horizontal and vertical divisions.
-- Monitor (1) : Monitor number to display.
-- ExportDir ("Display only") : Save figures into ExportDir, if ExportDir is not "Display only".
-- ExportParams : export figures' parameters.
+- `FigureList` (All figures) : Array of figures to be applied.
+- `Division` ([3, 2]) : Number of horizontal and vertical divisions.
+- `Monitor` (1) : Monitor number to display.
+- `ExportDir` ("Display only") : Save figures into ExportDir, if ExportDir is not "Display only".
+- `ExportParams` : export figures' parameters.
     The currently supported parameters are as follows.
     Default value conforms to [IEEE two-column format](https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-graphics-for-your-article/file-formatting/).
-    - WidthPx (3.5 * 96)
-    - FontSize (10.0)
-    - FontName ('Times New Roman')
-    - LineWidth (1.5)
-    - MarkerSize (10)
+    - `WidthPx` (3.5 * 96)
+    - `FontSize` (10.0)
+    - `FontName` ('Times New Roman')
+    - `LineWidth` (1.5)
+    - `MarkerSize` (10)
 
     If you have any requests, please contact us via [GitHub issues](https://github.com/kimushun1101/resizeAndArrangeFigures/issues).
 
@@ -50,7 +50,7 @@ resizeAndArrangeFigures
 ```
 Only the specified figures
 ```
-resizeAndArrangeFigures(Figures=figs)
+resizeAndArrangeFigures(FigureList=figs)
 ```
 Numbers of screen divisions : [horizontal, vertical]
 ```
@@ -66,7 +66,7 @@ resizeAndArrangeFigures(ExportDir='fig')
 ```
 Multiple settings above
 ```
-resizeAndArrangeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir='fig')
+resizeAndArrangeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig')
 ```
 Exported figure settings
 ```
