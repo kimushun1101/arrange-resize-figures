@@ -1,8 +1,10 @@
 # resize and arrange figures
 
-The script resizes the MATLAB figures and arranges them in a grid on the monitor.
-These figures can be exported in PDF format.
-The exported figures conforms to IEEE format as default.
+The function script resizes the MATLAB figures and arranges them in a grid on the monitor.
+It has the following features.
+- The font size, line width, and marker size are adjusted according to the figure's width.
+- These figures can be exported in PDF format.
+- The exported figures conforms to IEEE format as default.
 
 ## Installation
 There are two ways.
@@ -21,7 +23,7 @@ resizeAndArrangeFigures
 ### Option settings
 It can be executed with the following options (default values in parentheses).
 
-- `FigureList` (All figures) : Array of figures to be applied.
+- `FigureList` (All figures) : List of figures to be applied.
 - `Division` ([3, 2]) : Number of horizontal and vertical divisions.
 - `Monitor` (1) : Monitor number to display.
 - `ExportDir` ("Display only") : Save figures into ExportDir, if ExportDir is not "Display only".
@@ -30,11 +32,11 @@ It can be executed with the following options (default values in parentheses).
     Default value conforms to [IEEE two-column format](https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-graphics-for-your-article/file-formatting/).
     - `WidthPx` (3.5 * 96)
     - `FontSize` (10.0)
-    - `FontName` ('Times New Roman')
+    - `FontName` ("Times New Roman")
     - `LineWidth` (1.5)
     - `MarkerSize` (10)
 
-    If you have any requests, please contact us via [GitHub issues](https://github.com/kimushun1101/resizeAndArrangeFigures/issues).
+If you have any requests, please contact us via [GitHub issues](https://github.com/kimushun1101/resizeAndArrangeFigures/issues).
 
 
 ### Command examples
@@ -50,6 +52,7 @@ resizeAndArrangeFigures
 ```
 Only the specified figures
 ```
+figs = [figure(1), figure(2), ...]
 resizeAndArrangeFigures(FigureList=figs)
 ```
 Numbers of screen divisions : [horizontal, vertical]
@@ -64,15 +67,15 @@ Directory name of the export destination
 ```
 resizeAndArrangeFigures(ExportDir='fig')
 ```
-Multiple settings above
-```
-resizeAndArrangeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig')
-```
 Exported figure settings
 ```
 params.LineWidth = 5;
 params.MarkerSize = 30;
 resizeAndArrangeFigures(ExportParams=params)
+```
+Multiple settings above
+```
+resizeAndArrangeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig', ExportParams=params)
 ```
 
 ## License

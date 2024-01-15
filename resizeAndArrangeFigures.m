@@ -14,28 +14,27 @@ function resizeAndArrangeFigures(options)
 %%
 % 
 %   >> % Prepare some figures. 
-%   >> resizeAndArrangeFigures
-%   >> resizeAndArrangeFigures()
-%   >> resizeAndArrangeFigures(Figures=figs)
-%   >> resizeAndArrangeFigures(Division=[4,3])
-%   >> resizeAndArrangeFigures(Monitor=2)
-%   >> resizeAndArrangeFigures(ExportDir='fig')
-%   >> resizeAndArrangeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir='fig')
-%
-%% 
-% Setting ExportParams example:
-%%
-% 
-%   >> % Prepare some figures. 
+%   >> % Prepare options.
+%   >> figs = [figure(1), figure(3), figure(5)];
 %   >> params.LineWidth = 5;
 %   >> params.MarkerSize = 30;
+%   >> 
+%   >> % Excute samples. 
+%   >> resizeAndArrangeFigures
+%   >> resizeAndArrangeFigures()
+%   >> resizeAndArrangeFigures(FigureList=figs)
+%   >> resizeAndArrangeFigures(Division=[4,3])
+%   >> resizeAndArrangeFigures(Monitor=2)
+%   >> resizeAndArrangeFigures(ExportDir="fig")
 %   >> resizeAndArrangeFigures(ExportParams=params)
+%   >> resizeAndArrangeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir="fig", ExportParams=params)
 %
 %% 
-% Sample script is <./sampleScript.m sampleScript.m> or <./sampleLiveScript.mlx 
-% sampleLiveScript.mlx>
+% Sample scripts with some figures are <./sampleScript.m sampleScript.m> or 
+% <./sampleLiveScript.mlx sampleLiveScript.mlx>
 %% Website
-% GitHub : <https://github.com/kimushun1101/resizeAndArrangeFigures https://github.com/kimushun1101/resizeAndArrangeFigures>
+% A more detailed description is available on GitHub : <https://github.com/kimushun1101/resize-and-arrange-figures 
+% https://github.com/kimushun1101/resize-and-arrange-figures>
 arguments
     options.FigureList (1,:) matlab.ui.Figure = matlab.ui.Figure.empty()
     options.Division (1,2) {mustBeNumeric} = [3, 2] % horizontal, vertical
