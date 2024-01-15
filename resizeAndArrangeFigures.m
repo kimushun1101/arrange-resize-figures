@@ -37,7 +37,7 @@ function resizeAndArrangeFigures(options)
 %% Website
 % GitHub : <https://github.com/kimushun1101/resizeAndArrangeFigures https://github.com/kimushun1101/resizeAndArrangeFigures>
 arguments
-    options.Figures (1,:) matlab.ui.Figure = matlab.ui.Figure.empty()
+    options.FigureList (1,:) matlab.ui.Figure = matlab.ui.Figure.empty()
     options.Division (1,2) {mustBeNumeric} = [3, 2] % horizontal, vertical
     options.Monitor (1,1) {mustBeNumeric} = 1 % to use second display
     options.ExportDir (1,1) string = "Display only"
@@ -45,8 +45,8 @@ arguments
 end
 %% For default arguments
 % Set Figures
-if numel(options.Figures) > 0
-    figures = options.Figures;
+if numel(options.FigureList) > 0
+    figures = options.FigureList;
 else
     all_figures = findall(0,'Type','figure');
     notEmptyFigures = all_figures(~arrayfun(@(f) strcmp(f.Tag, 'EmbeddedFigure_Internal'), all_figures));
