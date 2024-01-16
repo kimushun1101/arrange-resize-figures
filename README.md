@@ -14,11 +14,8 @@ There are two ways.
 
 ## Usage
 There are no arguments that must be set.
-```
-resizeAndArrangeFigures
-% or
-% resizeAndArrangeFigures()
-```
+The command is only `resizeAndArrangeFigures`.
+See [the first example](#command-examples).
 
 ### Option settings
 It can be executed with the following options (default values in parentheses).
@@ -52,7 +49,7 @@ resizeAndArrangeFigures
 ```
 Only the specified figures
 ```
-figs = [figure(1), figure(2), ...]
+figs = [figure(1), figure(2)] % arbitrary figures
 resizeAndArrangeFigures(FigureList=figs)
 ```
 Numbers of screen divisions : [horizontal, vertical]
@@ -73,7 +70,7 @@ params.LineWidth = 5;
 params.MarkerSize = 30;
 resizeAndArrangeFigures(ExportParams=params)
 ```
-Multiple settings above
+Multiple of the above settings are made at the same time. It is also possible to give some of them.
 ```
 resizeAndArrangeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig', ExportParams=params)
 ```
