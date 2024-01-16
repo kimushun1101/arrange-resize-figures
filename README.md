@@ -1,15 +1,20 @@
-# resize and arrange figures
+# arrange resize figures
 
-The function script resizes the MATLAB figures and arranges them in a grid on the monitor.
+The MATLAB function script arranges and resizes the figures in a grid on the monitor.
+
+![example screenshot](./screenshot.png) 
+
 It has the following features.
-- The font size, line width, and marker size are adjusted according to the figure's width.
-- These figures can be exported in PDF format.
+- Arrange figures on the grid according to the given vertical and horizontal numbers.
+- Excess figures are stacked slightly off from the last figure position.
+- The font size, line width, and marker size are resized according to the figure's width.
+- These figures can be exported into PDF format.
 - The exported figures conforms to IEEE format as default.
 
 ## Installation
 There are two ways.
 - File Exchange
-- GitHub : Download or `git clone`, then `addpath "the directory"` in your MATLAB.
+- GitHub : Download or `git clone`, then copy `resizeAndArrangeFigures.mlx` into your workspace or `>> addpath "arrange-resize-figures"` in your MATLAB.
     
 
 ## Usage
