@@ -68,8 +68,8 @@ end
 %% 
 % Set ExportParams
 ExportParams = options.ExportParams;
-fields = {'WidthPx', 'FontSize', 'FontName', 'LineWidth', 'MarkerSize'};
-values = {3.5 * 96, 10.0, 'Times New Roman', 1.5, 10}; % Basically follows IEEE format
+fields = {'WidthPixels', 'FontSize', 'FontName', 'LineWidth', 'MarkerSize'};
+values = {3.5 * groot().ScreenPixelsPerInch, 10.0, 'Times New Roman', 1.5, 10}; % Basically follows IEEE format
 for i = 1:numel(fields)
     if ~isfield(ExportParams, fields{i})
         ExportParams.(fields{i}) = values{i};
@@ -97,7 +97,7 @@ positions(:,3) = repmat(MonitorSize(3)/divNum(1), [1, figureNumber])';
 positions(:,4) = repmat(MonitorSize(4)/divNum(2), [1, figureNumber])';
 %% 
 % Calculate scaling
-scaleRate = positions(1,3)/ExportParams.WidthPx;
+scaleRate = positions(1,3)/ExportParams.WidthPixels;
 FigureParams = ExportParams;
 for i = 1:numel(fields)
     ExportParamsValue = ExportParams.(fields{i});
