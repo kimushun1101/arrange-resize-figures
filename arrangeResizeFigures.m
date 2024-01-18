@@ -1,5 +1,5 @@
-function resizeAndArrangeFigures(options)
-%  RESIZEANDARRANGEFIGURES resizeAndArrangeFigures(options) resize and arrange the figure in a grid to 
+function arrangeResizeFigures(options)
+%  arrangeResizeFigures arrangeResizeFigures(options) resize and arrange the figure in a grid to 
 % fit the display.
 %% ARGUMENTS
 % options: 
@@ -20,14 +20,14 @@ function resizeAndArrangeFigures(options)
 %   >> params.MarkerSize = 30;
 %   >> 
 %   >> % Excute samples. 
-%   >> resizeAndArrangeFigures
-%   >> resizeAndArrangeFigures()
-%   >> resizeAndArrangeFigures(FigureList=figs)
-%   >> resizeAndArrangeFigures(Division=[4,3])
-%   >> resizeAndArrangeFigures(Monitor=2)
-%   >> resizeAndArrangeFigures(ExportDir="fig")
-%   >> resizeAndArrangeFigures(ExportParams=params)
-%   >> resizeAndArrangeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir="fig", ExportParams=params)
+%   >> arrangeResizeFigures
+%   >> arrangeResizeFigures()
+%   >> arrangeResizeFigures(FigureList=figs)
+%   >> arrangeResizeFigures(Division=[4,3])
+%   >> arrangeResizeFigures(Monitor=2)
+%   >> arrangeResizeFigures(ExportDir="fig")
+%   >> arrangeResizeFigures(ExportParams=params)
+%   >> arrangeResizeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir="fig", ExportParams=params)
 %
 %% 
 % Sample scripts with some figures are <./sampleScript.m sampleScript.m> or 
@@ -57,7 +57,7 @@ end
 DisplayNumMax = size(groot().MonitorPositions, 1);
 if DisplayNumMax < options.Monitor
     DisplayNum = DisplayNumMax;
-    warning('resizeAndArrangeFigures:incorrectNumber', ...
+    warning('arrangeResizeFigures:incorrectNumber', ...
         "Display %d is not recognized. " + ...
         "Instead, figures are arranged on Display %d.", ...
         "If you change the monitor connection after starting MATLAB, restart MATLAB." + ...
@@ -77,7 +77,7 @@ for i = 1:numel(fields)
 end
 UnsupportedParams = setdiff(fieldnames(ExportParams), fields);
 if ~isempty(UnsupportedParams)
-   warning('resizeAndArrangeFigures:ParamsNotSupported', ...
+   warning('arrangeResizeFigures:ParamsNotSupported', ...
            "ExportParams [%s]: Not supported currently. " + ...
            "If you have any requests, please contact us via GitHub issues.", ...
            strjoin(string(cell2mat(UnsupportedParams)), ', '));

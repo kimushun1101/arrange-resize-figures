@@ -52,10 +52,10 @@ params.LineWidth = 5;
 params.MarkerSize = 30;
 
 % Execute samples
-resizeAndArrangeFigures()
-% resizeAndArrangeFigures(FigureList=figs)
-% resizeAndArrangeFigures(Division=[4,3])
-% resizeAndArrangeFigures(Monitor=2)
-% resizeAndArrangeFigures(ExportDir="fig")
-% resizeAndArrangeFigures(ExportParams=params)
-% resizeAndArrangeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir="fig", ExportParams=params)
+arrangeResizeFigures()
+% arrangeResizeFigures(FigureList=figs)
+% arrangeResizeFigures(Division=[4,3])
+% arrangeResizeFigures(Monitor=2)
+% arrangeResizeFigures(ExportDir="fig")
+% arrangeResizeFigures(ExportParams=params)
+% arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir="fig", ExportParams=params)

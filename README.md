@@ -14,12 +14,12 @@ It has the following features.
 ## Installation
 There are two ways.
 - File Exchange
-- GitHub : Download or `git clone`, then copy `resizeAndArrangeFigures.mlx` into your workspace or `>> addpath "arrange-resize-figures"` in your MATLAB.
+- GitHub : Download or `git clone`, then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath "arrange-resize-figures"` in your MATLAB.
     
 
 ## Usage
 There are no arguments that must be set.
-The command is only `resizeAndArrangeFigures`.
+The command is only `arrangeResizeFigures`.
 See [the first example](#command-examples).
 
 ### Option settings
@@ -38,47 +38,60 @@ It can be executed with the following options (default values in parentheses).
     - `LineWidth` (1.5)
     - `MarkerSize` (10)
 
-If you have any requests, please contact us via [GitHub issues](https://github.com/kimushun1101/resizeAndArrangeFigures/issues).
+If you have any requests, please contact us via [GitHub issues](https://github.com/kimushun1101/arrangeResizeFigures/issues).
 
 
 ### Command examples
 
 After preparing some figures, run the following command or script.
-A sample script including preparation is [sampleScript.m](https://github.com/kimushun1101/resizeAndArrangeFigures/blob/main/sampleScript.m).
+A sample script including preparation is [sampleScript.m](https://github.com/kimushun1101/arrangeResizeFigures/blob/main/sampleScript.m).
 
 Basic
 ```
-resizeAndArrangeFigures
+arrangeResizeFigures
 % or
-% resizeAndArrangeFigures()
+% arrangeResizeFigures()
 ```
 Only the specified figures
 ```
 figs = [figure(1), figure(2)] % arbitrary figures
-resizeAndArrangeFigures(FigureList=figs)
+arrangeResizeFigures(FigureList=figs)
 ```
 Numbers of screen divisions : [horizontal, vertical]
 ```
-resizeAndArrangeFigures(Division=[4,3])
+arrangeResizeFigures(Division=[4,3])
 ```
 Monitor to be displayed
 ```
-resizeAndArrangeFigures(Monitor=2)
+arrangeResizeFigures(Monitor=2)
 ```
 Directory name of the export destination
 ```
-resizeAndArrangeFigures(ExportDir='fig')
+arrangeResizeFigures(ExportDir='fig')
 ```
 Exported figure settings
 ```
 params.LineWidth = 5;
 params.MarkerSize = 30;
-resizeAndArrangeFigures(ExportParams=params)
+arrangeResizeFigures(ExportParams=params)
 ```
 Multiple of the above settings are made at the same time. It is also possible to give some of them.
 ```
-resizeAndArrangeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig', ExportParams=params)
+arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig', ExportParams=params)
 ```
+
+## Tips
+
+- A space is provided at the bottom of the set of arranged figures. You can click here to return the focus to MATLAB command window. See [the screenshot](#arrange-resize-figures).
+- If you add a figure name, the file name will be used when the figure is exported to PDF format.
+    ```
+    figure('Name', 'liner');
+    ```
+    Otherwise, the file name will be "Figure" + figure.Number.
+- To expose LiveScript figures outside, set the 'Visible' parameter to 'on'.
+    ```
+    figure('Name', 'liner', 'Visible', 'on');
+    ```
 
 ## License
 BSD 3-Clause License
