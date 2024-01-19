@@ -14,7 +14,7 @@ It has the following features.
 ## Installation
 There are two ways.
 - File Exchange
-- GitHub : Download or `git clone`, then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath "arrange-resize-figures"` in your MATLAB.
+- GitHub : Download or `git clone`, then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath('arrange-resize-figures')` in your MATLAB.
     
 
 ## Usage
@@ -85,12 +85,12 @@ arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig'
 - A space is provided at the bottom of the set of arranged figures. You can click here to return the focus to MATLAB command window. See [the screenshot](#arrange-resize-figures).
 - If you add a figure name, the file name will be used when the figure is exported to PDF format.
     ```
-    figure('Name', 'liner');
+    figure(Name='liner');
     ```
     Otherwise, the file name will be "Figure" + figure.Number.
 - To expose LiveScript figures outside, set the 'Visible' parameter to 'on'.
     ```
-    figure('Name', 'liner', 'Visible', 'on');
+    figure(Name='liner', Visible='on');
     ```
 
 ## License
