@@ -1,5 +1,7 @@
 # arrange and resize figures
 
+[![View arrange-resize-figures on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/158051-arrange-resize-figures)
+
 This MATLAB function script arranges and resizes figures on the grid to fit your monitor.
 
 ![example screenshot](./screenshot.png) 
@@ -15,7 +17,7 @@ It has the following features.
 ## Installation
 
 There are two ways.
-- File Exchange
+- [![View arrange-resize-figures on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/158051-arrange-resize-figures)
 - GitHub : Download or `git clone`, then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath('arrange-resize-figures')` in your MATLAB.
 
 
