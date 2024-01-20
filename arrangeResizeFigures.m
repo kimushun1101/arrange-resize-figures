@@ -4,11 +4,12 @@ function arrangeResizeFigures(options)
 %% ARGUMENTS
 % options: 
 %% 
-% * |Figures: Array of figures to be applied.|
-% * |Division: Number of horizontal and vertical divisions.|
-% * |Monitor: Monitor number to display.|
-% * |ExportDir: Save figures into ExportDir, if ExportDir is not "Display only".|
-% * |ExportParams: export figures' parameters.|
+% * |FigureList : Array of figures to be applied.|
+% * |Division : Number of horizontal and vertical divisions.|
+% * |PositionMargin : Margins of a set of figures and between each figure.|
+% * |Monitor : Monitor number to display.|
+% * |ExportDir : Save figures into ExportDir, if ExportDir is not "Display only".|
+% * |ExportParams : export figures' parameters.|
 %% EXAMPLES
 % One line examples:
 %%
@@ -24,10 +25,11 @@ function arrangeResizeFigures(options)
 %   >> arrangeResizeFigures()
 %   >> arrangeResizeFigures(FigureList=figs)
 %   >> arrangeResizeFigures(Division=[4,3])
+%   >> arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
 %   >> arrangeResizeFigures(Monitor=2)
 %   >> arrangeResizeFigures(ExportDir="fig")
 %   >> arrangeResizeFigures(ExportParams=params)
-%   >> arrangeResizeFigures(Figures=figs, Division=[4,3], Monitor=2, ExportDir="fig", ExportParams=params)
+%   >> arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
 %
 %% 
 % Sample scripts with some figures are <./sampleScript.m sampleScript.m> or 
@@ -42,6 +44,7 @@ function arrangeResizeFigures(options)
 arguments
     options.FigureList (1,:) matlab.ui.Figure = matlab.ui.Figure.empty()
     options.Division (1,2) {mustBeNumeric} = [3, 2] % horizontal, vertical
+    options.PositionMargin (1,4) {mustBeNumeric} = [0, 50, 0, 25] % [left bottom width height]
     options.Monitor (1,1) {mustBeNumeric} = 1 % to use second display
     options.ExportDir (1,1) string = "Display only"
     options.ExportParams (1,1) struct = struct()
@@ -49,12 +52,12 @@ end
 %% For default arguments
 % Set Figures
 if numel(options.FigureList) > 0
-    figures = options.FigureList;
+    figureList = options.FigureList;
 else
-    all_figures = findall(0,'Type','figure');
-    notEmptyFigures = all_figures(~arrayfun(@(f) strcmp(f.Tag, 'EmbeddedFigure_Internal'), all_figures));
+    allFigures = findall(0,'Type','figure');
+    notEmptyFigures = allFigures(~arrayfun(@(f) strcmp(f.Tag, 'EmbeddedFigure_Internal'), allFigures));
     [~, sortedIndices] = sort(arrayfun(@(f) f.Number, notEmptyFigures));
-    figures = notEmptyFigures(sortedIndices);
+    figureList = notEmptyFigures(sortedIndices);
 end
 %% 
 % Check Display Number
@@ -88,22 +91,22 @@ if ~isempty(UnsupportedParams)
 end
 %% For setting parameters
 % Calculate positions
-stackOffset = [30 -30 0 0];
-pMargin = [0 25 0 50]; % positionMargin
-mPosition = groot().MonitorPositions(DisplayNum,:);
-mPosition(3) = mPosition(3) - pMargin(3);
-mPosition(4) = mPosition(4) - pMargin(4);
+stackingOffset = [30 -30 0 0];
 nDiv = options.Division;
-fSize = [mPosition(3)/nDiv(1)-pMargin(1), mPosition(4)/nDiv(2)-pMargin(2)]; % figureSize
+pMargin = options.PositionMargin;
+mPosition = groot().MonitorPositions(DisplayNum,:);
+mPosition(3) = mPosition(3) - pMargin(1);
+mPosition(4) = mPosition(4) - pMargin(2);
+fSize = [mPosition(3)/nDiv(1)-pMargin(3), mPosition(4)/nDiv(2)-pMargin(4)]; % figureSize
 gridAmount = prod(nDiv);
-positions = zeros(prod(nDiv), 4);
-positions(:,1) = repmat(     (0:nDiv(1)-1).*(fSize(1)+pMargin(1)) + mPosition(1) + pMargin(3), 1, nDiv(2))';
-positions(:,2) = repelem(flip(0:nDiv(2)-1).*(fSize(2)+pMargin(2)) + mPosition(2) + pMargin(4), 1, nDiv(1))';
-positions(:,3) = repmat(fSize(1), [1, gridAmount])';
-positions(:,4) = repmat(fSize(2), [1, gridAmount])';
+positionList = zeros(prod(nDiv), 4);
+positionList(:,1) = repmat(     (0:nDiv(1)-1).*(fSize(1)+pMargin(3)) + mPosition(1) + pMargin(1), 1, nDiv(2))';
+positionList(:,2) = repelem(flip(0:nDiv(2)-1).*(fSize(2)+pMargin(4)) + mPosition(2) + pMargin(2), 1, nDiv(1))';
+positionList(:,3) = repmat(fSize(1), [1, gridAmount])';
+positionList(:,4) = repmat(fSize(2), [1, gridAmount])';
 %% 
 % Calculate scaling
-scaleRate = positions(1,3)/ExportParams.WidthPixels;
+scaleRate = positionList(1,3)/ExportParams.WidthPixels;
 FigureParams = ExportParams;
 for i = 1:numel(fields)
     ExportParamsValue = ExportParams.(fields{i});
@@ -111,10 +114,9 @@ for i = 1:numel(fields)
         FigureParams.(fields{i}) = scaleRate * ExportParamsValue;
     end
 end
-%% 
-% Set figures parameters
-for nFig = 1:numel(figures)
-    figure_ = figures(nFig);
+%% Set figures parameters
+for nFig = 1:numel(figureList)
+    figure_ = figureList(nFig);
     % Set figure Children (axes or legend)
     for NumFigureChildren = 1:numel(figure_.Children)
         % Set Axes
@@ -158,9 +160,9 @@ for nFig = 1:numel(figures)
     % Set Position
     figure(nFig);
     if nFig < gridAmount
-        figure_.OuterPosition = positions(nFig,:);
+        figure_.OuterPosition = positionList(nFig,:);
     else
-        figure_.OuterPosition = positions(end,:) + stackOffset*(nFig - gridAmount);
+        figure_.OuterPosition = positionList(end,:) + stackingOffset*(nFig - gridAmount);
     end
     % Export PDF
     if strcmp(options.ExportDir, "Display only")

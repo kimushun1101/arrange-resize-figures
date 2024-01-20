@@ -1,6 +1,6 @@
-# arrange resize figures
+# arrange and resize figures
 
-This MATLAB function script arranges and resizes the figures in a grid on the monitor.
+This MATLAB function script arranges and resizes figures on the grid to fit your monitor.
 
 ![example screenshot](./screenshot.png) 
 
@@ -32,6 +32,7 @@ It can be executed with the following options (default values in parentheses).
 
 - `FigureList` (All figures) : List of figures to be applied.
 - `Division` ([3, 2]) : Number of horizontal and vertical divisions.
+- `PositionMargin` ([0, 50, 0, 25]) : Margins of a set of figures and between each figure.
 - `Monitor` (1) : Monitor number to display.
 - `ExportDir` ("Display only") : Save figures into ExportDir, if ExportDir is not "Display only".
 - `ExportParams` : export figures' parameters.
@@ -57,20 +58,24 @@ arrangeResizeFigures
 % or
 % arrangeResizeFigures()
 ```
-Only the specified figures
+Only the specified figures; see [Tips](#tips)
 ```
-figs = [figure(1), figure(2)] % arbitrary figures
+figs = [figure(1), figure(3), figure(5)]; % arbitrary figures
 arrangeResizeFigures(FigureList=figs)
 ```
 Numbers of screen divisions : [horizontal, vertical]
 ```
 arrangeResizeFigures(Division=[4,3])
 ```
+Margins of a set of figures and between each figure : [left bottom width height]
+```
+arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
+```
 Monitor to be displayed
 ```
 arrangeResizeFigures(Monitor=2)
 ```
-Directory name of the export destination
+Directory name of the export destination; see [Tips](#tips)
 ```
 arrangeResizeFigures(ExportDir='fig')
 ```
@@ -82,7 +87,7 @@ arrangeResizeFigures(ExportParams=params)
 ```
 Multiple of the above settings are made at the same time. It is also possible to give some of them.
 ```
-arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig', ExportParams=params)
+arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
 ```
 
 
@@ -90,16 +95,18 @@ arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig'
 
 - If you add a figure name, the file name will be used when the figure is exported to PDF format.
     ```
-    figure(Name='liner');
+    figure(Name='liner')
     ```
     Otherwise, the file name will be "Figure" + figure.Number.
 - To expose LiveScript figures outside, set the 'Visible' parameter to 'on'.
     ```
-    figure(Name='liner', Visible='on');
+    figure(Name='liner', Visible='on')
     ```
 - The following command helps us to find figure numbers.
     ```
     findall(0,'Type','figure')
+    % figs = [figure(1), figure(3), figure(5)];
+    % arrangeResizeFigures(FigureList=figs)
     ```
 
 

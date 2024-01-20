@@ -54,8 +54,9 @@ params.MarkerSize = 30;
 % Execute samples
 arrangeResizeFigures()
 % arrangeResizeFigures(FigureList=figs)
-arrangeResizeFigures(Division=[3,2])
+% arrangeResizeFigures(Division=[3,2])
+% arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
 % arrangeResizeFigures(Monitor=2)
 % arrangeResizeFigures(ExportDir="fig")
 % arrangeResizeFigures(ExportParams=params)
-% arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir="fig", ExportParams=params)
+% arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
