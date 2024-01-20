@@ -112,4 +112,4 @@ arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 2
 
 ## License
 
-BSD 3-Clause License
+MIT License
