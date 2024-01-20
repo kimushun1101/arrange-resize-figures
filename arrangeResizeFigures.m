@@ -1,6 +1,6 @@
 function arrangeResizeFigures(options)
-%  arrangeResizeFigures arrangeResizeFigures(options) resize and arrange the figure in a grid to 
-% fit the display.
+%  ARRANGERESIZEFIGURES arrangeResizeFigures(options) resize and arrange the figure in a grid to fit 
+% the display.
 %% ARGUMENTS
 % options: 
 %% 
@@ -35,6 +35,10 @@ function arrangeResizeFigures(options)
 %% Website
 % A more detailed description is available on GitHub : <https://github.com/kimushun1101/resize-and-arrange-figures 
 % https://github.com/kimushun1101/resize-and-arrange-figures>
+% 
+% License
+% 
+% 
 arguments
     options.FigureList (1,:) matlab.ui.Figure = matlab.ui.Figure.empty()
     options.Division (1,2) {mustBeNumeric} = [3, 2] % horizontal, vertical
@@ -84,17 +88,19 @@ if ~isempty(UnsupportedParams)
 end
 %% For setting parameters
 % Calculate positions
-positionOffset = [30 -30 0 0];
-HighDecrease = 100;
-MonitorSize = groot().MonitorPositions(DisplayNum,:);
-MonitorSize(4) = MonitorSize(4) - HighDecrease;
-divNum = options.Division;
-figureNumber = prod(divNum);
-positions = zeros(prod(divNum), 4);
-positions(:,1) = repmat((0:divNum(1)-1).*MonitorSize(3)/divNum(1) + MonitorSize(1), 1, divNum(2))';
-positions(:,2) = repelem((divNum(2)-1:-1:0).*MonitorSize(4)/divNum(2) + MonitorSize(2) + HighDecrease, 1, divNum(1))';
-positions(:,3) = repmat(MonitorSize(3)/divNum(1), [1, figureNumber])';
-positions(:,4) = repmat(MonitorSize(4)/divNum(2), [1, figureNumber])';
+stackOffset = [30 -30 0 0];
+pMargin = [0 25 0 50]; % positionMargin
+mPosition = groot().MonitorPositions(DisplayNum,:);
+mPosition(3) = mPosition(3) - pMargin(3);
+mPosition(4) = mPosition(4) - pMargin(4);
+nDiv = options.Division;
+fSize = [mPosition(3)/nDiv(1)-pMargin(1), mPosition(4)/nDiv(2)-pMargin(2)]; % figureSize
+gridAmount = prod(nDiv);
+positions = zeros(prod(nDiv), 4);
+positions(:,1) = repmat(     (0:nDiv(1)-1).*(fSize(1)+pMargin(1)) + mPosition(1) + pMargin(3), 1, nDiv(2))';
+positions(:,2) = repelem(flip(0:nDiv(2)-1).*(fSize(2)+pMargin(2)) + mPosition(2) + pMargin(4), 1, nDiv(1))';
+positions(:,3) = repmat(fSize(1), [1, gridAmount])';
+positions(:,4) = repmat(fSize(2), [1, gridAmount])';
 %% 
 % Calculate scaling
 scaleRate = positions(1,3)/ExportParams.WidthPixels;
@@ -107,8 +113,8 @@ for i = 1:numel(fields)
 end
 %% 
 % Set figures parameters
-for NumFig = 1:numel(figures)
-    figure_ = figures(NumFig);
+for nFig = 1:numel(figures)
+    figure_ = figures(nFig);
     % Set figure Children (axes or legend)
     for NumFigureChildren = 1:numel(figure_.Children)
         % Set Axes
@@ -150,10 +156,11 @@ for NumFig = 1:numel(figures)
         continue
     end
     % Set Position
-    if NumFig < figureNumber
-        figure_.OuterPosition = positions(NumFig,:);
+    figure(nFig);
+    if nFig < gridAmount
+        figure_.OuterPosition = positions(nFig,:);
     else
-        figure_.OuterPosition = positions(end,:) + positionOffset*(NumFig - figureNumber);
+        figure_.OuterPosition = positions(end,:) + stackOffset*(nFig - gridAmount);
     end
     % Export PDF
     if strcmp(options.ExportDir, "Display only")
