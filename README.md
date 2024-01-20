@@ -1,6 +1,6 @@
 # arrange resize figures
 
-The MATLAB function script arranges and resizes the figures in a grid on the monitor.
+This MATLAB function script arranges and resizes the figures in a grid on the monitor.
 
 ![example screenshot](./screenshot.png) 
 
@@ -11,18 +11,23 @@ It has the following features.
 - These figures can be exported into PDF format.
 - The exported figures conforms to IEEE format as default.
 
+
 ## Installation
+
 There are two ways.
 - File Exchange
 - GitHub : Download or `git clone`, then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath('arrange-resize-figures')` in your MATLAB.
-    
+
 
 ## Usage
+
 There are no arguments that must be set.
 The command is only `arrangeResizeFigures`.
 See [the first example](#command-examples).
 
+
 ### Option settings
+
 It can be executed with the following options (default values in parentheses).
 
 - `FigureList` (All figures) : List of figures to be applied.
@@ -80,9 +85,9 @@ Multiple of the above settings are made at the same time. It is also possible to
 arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig', ExportParams=params)
 ```
 
+
 ## Tips
 
-- A space is provided at the bottom of the set of arranged figures. You can click here to return the focus to MATLAB command window. See [the screenshot](#arrange-resize-figures).
 - If you add a figure name, the file name will be used when the figure is exported to PDF format.
     ```
     figure(Name='liner');
@@ -92,6 +97,12 @@ arrangeResizeFigures(FigureList=figs, Division=[4,3], Monitor=2, ExportDir='fig'
     ```
     figure(Name='liner', Visible='on');
     ```
+- The following command helps us to find figure numbers.
+    ```
+    findall(0,'Type','figure')
+    ```
+
 
 ## License
+
 BSD 3-Clause License
