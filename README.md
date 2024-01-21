@@ -24,8 +24,7 @@ There are two ways.
 ## Usage
 
 There are no arguments that must be set.
-The command is only `arrangeResizeFigures`.
-See [the first example](#command-examples).
+The command is only `>> arrangeResizeFigures` or `>> arrangeResizeFigures()`.
 
 
 ### Option settings
@@ -40,7 +39,7 @@ It can be executed with the following options (default values in parentheses).
 - `ExportParams` : Parameters of exported figures.
     The currently supported parameters are as follows.
     Default value conforms to [IEEE two-column format](https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-graphics-for-your-article/file-formatting/).
-    - `WidthPx` (3.5 * 96)
+    - `WidthPx` (3.5 * ScreenPixelsPerInch)
     - `FontSize` (10.0)
     - `FontName` ("Times New Roman")
     - `LineWidth` (1.5)
