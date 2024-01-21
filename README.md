@@ -17,8 +17,8 @@ It has the following features.
 ## Installation
 
 There are two ways.
-- Open `Add-On Explorer` on your MATLAB and Search `arrange and resize figures`, then `Add`. See [Official Video on YouTube](https://www.youtube.com/watch?v=gzkWSsxGm6s).
-- Download from [![View arrange-resize-figures on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/158051-arrange-resize-figures), then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath('arrange-resize-figures')` in your MATLAB.
+- Open [Add-On Explorer](https://jp.mathworks.com/help/matlab/matlab_env/get-add-ons.html) on your MATLAB and Search `arrange and resize figures`, then `Add`.  
+- Download from [![View arrange-resize-figures on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/158051-arrange-resize-figures), then copy `arrangeResizeFigures.mlx` into your workspace or [addpath](https://jp.mathworks.com/help/matlab/ref/addpath.html) in your MATLAB.
 
 
 ## Usage
@@ -32,7 +32,7 @@ See [the first example](#command-examples).
 
 It can be executed with the following options (default values in parentheses).
 
-- `FigureNumbers` (All figures) : List of figure Numbers to be applied.
+- `FigureNumbers` (All figures) : List of figure Numbers to be applied this function to.
 - `Division` ([3, 2]) : Number of horizontal and vertical divisions.
 - `PositionMargin` ([0, 50, 0, 25]) : Margins of a set of figures and between each figure.
 - `Monitor` (1) : Monitor number to display.
@@ -52,7 +52,7 @@ If you have any requests, please contact us via [GitHub issues](https://github.c
 ### Command examples
 
 After preparing some figures, run the following command or script.
-A sample script including preparation is [sampleScript.m](https://github.com/kimushun1101/arrangeResizeFigures/blob/main/sampleScript.m).
+A sample script including preparation is [sampleScript.m](https://github.com/kimushun1101/arrange-resize-figures/blob/main/sampleScript.m).
 
 Basic
 ```
