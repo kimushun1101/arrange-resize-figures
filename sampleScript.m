@@ -47,16 +47,16 @@ legend('$x$', '$\sqrt{x}$', '$\sin{x}$', 'Location', 'northwest');
 
 %% Examples
 % Prepare options.
-figs = [figure(1), figure(3), figure(5)];
+figNums = [1, 3, 5];
 params.LineWidth = 5;
 params.MarkerSize = 30;
 
 % Execute samples
 arrangeResizeFigures()
-% arrangeResizeFigures(FigureList=figs)
+% arrangeResizeFigures(FigureNumbers=figNums)
 % arrangeResizeFigures(Division=[3,2])
 % arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
 % arrangeResizeFigures(Monitor=2)
 % arrangeResizeFigures(ExportDir="fig")
 % arrangeResizeFigures(ExportParams=params)
-% arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
+% arrangeResizeFigures(FigureNumbers=figNums, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)

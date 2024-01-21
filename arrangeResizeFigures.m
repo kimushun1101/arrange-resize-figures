@@ -4,7 +4,7 @@ function arrangeResizeFigures(options)
 %% ARGUMENTS
 % options: 
 %% 
-% * |FigureList : Array of figures to be applied.|
+% * |FigureNumbers : Array of figures to be applied.|
 % * |Division : Number of horizontal and vertical divisions.|
 % * |PositionMargin : Margins of a set of figures and between each figure.|
 % * |Monitor : Monitor number to display.|
@@ -16,20 +16,20 @@ function arrangeResizeFigures(options)
 % 
 %   >> % Prepare some figures. 
 %   >> % Prepare options.
-%   >> figs = [figure(1), figure(3), figure(5)];
+%   >> figs = [1, 3, 5];
 %   >> params.LineWidth = 5;
 %   >> params.MarkerSize = 30;
 %   >> 
 %   >> % Excute samples. 
 %   >> arrangeResizeFigures
 %   >> arrangeResizeFigures()
-%   >> arrangeResizeFigures(FigureList=figs)
+%   >> arrangeResizeFigures(FigureNumbers=figs)
 %   >> arrangeResizeFigures(Division=[4,3])
 %   >> arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
 %   >> arrangeResizeFigures(Monitor=2)
 %   >> arrangeResizeFigures(ExportDir="fig")
 %   >> arrangeResizeFigures(ExportParams=params)
-%   >> arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
+%   >> arrangeResizeFigures(FigureNumbers=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
 %
 %% 
 % Sample scripts with some figures are <./sampleScript.m sampleScript.m> or 
@@ -42,7 +42,7 @@ function arrangeResizeFigures(options)
 % 
 % 
 arguments
-    options.FigureList (1,:) matlab.ui.Figure = matlab.ui.Figure.empty()
+    options.FigureNumbers (1,:) {mustBeNumeric} = []
     options.Division (1,2) {mustBeNumeric} = [3, 2] % horizontal, vertical
     options.PositionMargin (1,4) {mustBeNumeric} = [0, 50, 0, 25] % [left bottom width height]
     options.Monitor (1,1) {mustBeNumeric} = 1 % to use second display
@@ -51,13 +51,13 @@ arguments
 end
 %% For default arguments
 % Set Figures
-if numel(options.FigureList) > 0
-    figureList = options.FigureList;
+if numel(options.FigureNumbers) > 0
+    FigureList = arrayfun(@figure, options.FigureNumbers);
 else
     allFigures = findall(0,'Type','figure');
     notEmptyFigures = allFigures(~arrayfun(@(f) strcmp(f.Tag, 'EmbeddedFigure_Internal'), allFigures));
     [~, sortedIndices] = sort(arrayfun(@(f) f.Number, notEmptyFigures));
-    figureList = notEmptyFigures(sortedIndices);
+    FigureList = notEmptyFigures(sortedIndices);
 end
 %% 
 % Check Display Number
@@ -115,8 +115,8 @@ for i = 1:numel(fields)
     end
 end
 %% Set figures parameters
-for nFig = 1:numel(figureList)
-    figure_ = figureList(nFig);
+for nFig = 1:numel(FigureList)
+    figure_ = FigureList(nFig);
     % Set figure Children (axes or legend)
     for NumFigureChildren = 1:numel(figure_.Children)
         % Set Axes

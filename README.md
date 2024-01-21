@@ -17,8 +17,8 @@ It has the following features.
 ## Installation
 
 There are two ways.
-- [![View arrange-resize-figures on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/158051-arrange-resize-figures)
-- GitHub : Download or `git clone`, then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath('arrange-resize-figures')` in your MATLAB.
+- Open `Add-On Explorer` on your MATLAB and Search `arrange and resize figures`, then `intall`. See [Official Video on YouTube](https://www.youtube.com/watch?v=gzkWSsxGm6s).
+- Download from [![View arrange-resize-figures on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/158051-arrange-resize-figures), then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath('arrange-resize-figures')` in your MATLAB.
 
 
 ## Usage
@@ -32,12 +32,12 @@ See [the first example](#command-examples).
 
 It can be executed with the following options (default values in parentheses).
 
-- `FigureList` (All figures) : List of figures to be applied.
+- `FigureNumbers` (All figures) : List of figure Numbers to be applied.
 - `Division` ([3, 2]) : Number of horizontal and vertical divisions.
 - `PositionMargin` ([0, 50, 0, 25]) : Margins of a set of figures and between each figure.
 - `Monitor` (1) : Monitor number to display.
 - `ExportDir` ("Display only") : Save figures into ExportDir, if ExportDir is not "Display only".
-- `ExportParams` : export figures' parameters.
+- `ExportParams` : Parameters of exported figures.
     The currently supported parameters are as follows.
     Default value conforms to [IEEE two-column format](https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-graphics-for-your-article/file-formatting/).
     - `WidthPx` (3.5 * 96)
@@ -62,8 +62,8 @@ arrangeResizeFigures
 ```
 Only the specified figures; see [Tips](#tips)
 ```
-figs = [figure(1), figure(3), figure(5)]; % arbitrary figures
-arrangeResizeFigures(FigureList=figs)
+figNums = [1, 3, 5]; % arbitrary figure numbers
+arrangeResizeFigures(FigureNumbers=figNums)
 ```
 Numbers of screen divisions : [horizontal, vertical]
 ```
@@ -81,7 +81,7 @@ Directory name of the export destination; see [Tips](#tips)
 ```
 arrangeResizeFigures(ExportDir='fig')
 ```
-Exported figure settings
+Set Parameters of exported figures
 ```
 params.LineWidth = 5;
 params.MarkerSize = 30;
@@ -89,7 +89,7 @@ arrangeResizeFigures(ExportParams=params)
 ```
 Multiple of the above settings are made at the same time. It is also possible to give some of them.
 ```
-arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
+arrangeResizeFigures(FigureNumbers=figNums, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
 ```
 
 
@@ -107,11 +107,11 @@ arrangeResizeFigures(FigureList=figs, Division=[4,3], PositionMargin=[50, 100, 2
 - The following command helps us to find figure numbers.
     ```
     findall(0,'Type','figure')
-    % figs = [figure(1), figure(3), figure(5)];
-    % arrangeResizeFigures(FigureList=figs)
+    % figNums = [1, 3, 5];
+    % arrangeResizeFigures(FigureNumbers=figNums)
     ```
 
 
 ## License
 
-MIT License
+The MIT License
