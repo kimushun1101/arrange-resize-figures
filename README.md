@@ -17,7 +17,7 @@ It has the following features.
 ## Installation
 
 There are two ways.
-- Open `Add-On Explorer` on your MATLAB and Search `arrange and resize figures`, then `intall`. See [Official Video on YouTube](https://www.youtube.com/watch?v=gzkWSsxGm6s).
+- Open `Add-On Explorer` on your MATLAB and Search `arrange and resize figures`, then `Add`. See [Official Video on YouTube](https://www.youtube.com/watch?v=gzkWSsxGm6s).
 - Download from [![View arrange-resize-figures on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/158051-arrange-resize-figures), then copy `arrangeResizeFigures.mlx` into your workspace or `>> addpath('arrange-resize-figures')` in your MATLAB.
 
 
@@ -46,7 +46,7 @@ It can be executed with the following options (default values in parentheses).
     - `LineWidth` (1.5)
     - `MarkerSize` (10)
 
-If you have any requests, please contact us via [GitHub issues](https://github.com/kimushun1101/arrangeResizeFigures/issues).
+If you have any requests, please contact us via [GitHub issues](https://github.com/kimushun1101/arrange-resize-figures/issues).
 
 
 ### Command examples
