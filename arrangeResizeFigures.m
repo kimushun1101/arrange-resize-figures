@@ -4,32 +4,31 @@ function arrangeResizeFigures(options)
 %% ARGUMENTS
 % options: 
 %% 
-% * |FigureNumbers : Array of figures to be applied.|
-% * |Division : Number of horizontal and vertical divisions.|
+% * |FigureNumbers : List of figure Numbers to be applied this function to.|
+% * |Division : Numbers of horizontal and vertical divisions.|
 % * |PositionMargin : Margins of a set of figures and between each figure.|
 % * |Monitor : Monitor number to display.|
 % * |ExportDir : Save figures into ExportDir, if ExportDir is not "Display only".|
-% * |ExportParams : export figures' parameters.|
+% * |ExportParams : Parameters of exported figures.|
 %% EXAMPLES
 % One line examples:
 %%
 % 
 %   >> % Prepare some figures. 
-%   >> % Prepare options.
-%   >> figs = [1, 3, 5];
+%   >> % Prepare params option.
 %   >> params.LineWidth = 5;
 %   >> params.MarkerSize = 30;
 %   >> 
 %   >> % Excute samples. 
 %   >> arrangeResizeFigures
 %   >> arrangeResizeFigures()
-%   >> arrangeResizeFigures(FigureNumbers=figs)
+%   >> arrangeResizeFigures(FigureNumbers=[2, 4, 6])
 %   >> arrangeResizeFigures(Division=[4,3])
 %   >> arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
 %   >> arrangeResizeFigures(Monitor=2)
 %   >> arrangeResizeFigures(ExportDir="fig")
 %   >> arrangeResizeFigures(ExportParams=params)
-%   >> arrangeResizeFigures(FigureNumbers=figs, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
+%   >> arrangeResizeFigures(FigureNumbers=figNums, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
 %
 %% 
 % Sample scripts with some figures are <./sampleScript.m sampleScript.m> or 
@@ -51,13 +50,12 @@ arguments
 end
 %% For default arguments
 % Set Figures
+allFigures = findall(0,'Type','figure');
+notEmptyFigures = allFigures(~arrayfun(@(f) strcmp(f.Tag, 'EmbeddedFigure_Internal'), allFigures));
+[~, sortedIndices] = sort(arrayfun(@(f) f.Number, notEmptyFigures));
+applyFigures = notEmptyFigures(sortedIndices);
 if numel(options.FigureNumbers) > 0
-    FigureList = arrayfun(@figure, options.FigureNumbers);
-else
-    allFigures = findall(0,'Type','figure');
-    notEmptyFigures = allFigures(~arrayfun(@(f) strcmp(f.Tag, 'EmbeddedFigure_Internal'), allFigures));
-    [~, sortedIndices] = sort(arrayfun(@(f) f.Number, notEmptyFigures));
-    FigureList = notEmptyFigures(sortedIndices);
+    applyFigures = applyFigures(ismember([applyFigures.Number], options.FigureNumbers));
 end
 %% 
 % Check Display Number
@@ -115,8 +113,8 @@ for i = 1:numel(fields)
     end
 end
 %% Set figures parameters
-for nFig = 1:numel(FigureList)
-    figure_ = FigureList(nFig);
+for nFig = 1:numel(applyFigures)
+    figure_ = applyFigures(nFig);
     % Set figure Children (axes or legend)
     for NumFigureChildren = 1:numel(figure_.Children)
         % Set Axes
@@ -153,12 +151,8 @@ for nFig = 1:numel(FigureList)
             legend_.Interpreter = 'latex';
         end
     end
-    % Skip figures in LiveScripts
-    if strcmp(figure_.Tag, 'EmbeddedFigure_Internal')
-        continue
-    end
     % Set Position
-    figure(nFig);
+    figure(figure_.Number)
     if nFig < gridAmount
         figure_.OuterPosition = positionList(nFig,:);
     else

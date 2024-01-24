@@ -46,14 +46,13 @@ ylabel('outputs');
 legend('$x$', '$\sqrt{x}$', '$\sin{x}$', 'Location', 'northwest');
 
 %% Examples
-% Prepare options.
-figNums = [1, 3, 5];
+% Prepare params option.
 params.LineWidth = 5;
 params.MarkerSize = 30;
 
 % Execute samples
 arrangeResizeFigures()
-% arrangeResizeFigures(FigureNumbers=figNums)
+% arrangeResizeFigures(FigureNumbers=[2, 4, 6])
 % arrangeResizeFigures(Division=[3,2])
 % arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
 % arrangeResizeFigures(Monitor=2)

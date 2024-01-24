@@ -61,8 +61,7 @@ arrangeResizeFigures
 ```
 Only the specified figures; see [Tips](#tips)
 ```
-figNums = [1, 3, 5]; % arbitrary figure numbers
-arrangeResizeFigures(FigureNumbers=figNums)
+arrangeResizeFigures(FigureNumbers=[2, 4, 6])
 ```
 Numbers of screen divisions : [horizontal, vertical]
 ```
@@ -106,8 +105,7 @@ arrangeResizeFigures(FigureNumbers=figNums, Division=[4,3], PositionMargin=[50, 
 - The following command helps us to find figure numbers.
     ```
     findall(0,'Type','figure')
-    % figNums = [1, 3, 5];
-    % arrangeResizeFigures(FigureNumbers=figNums)
+    % arrangeResizeFigures(FigureNumbers=[2, 4, 6])
     ```
 
 
