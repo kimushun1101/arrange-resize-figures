@@ -47,7 +47,8 @@ legend('$x$', '$\sqrt{x}$', '$\sin{x}$', 'Location', 'northwest');
 
 %% Examples
 % Prepare params option.
-params.LineWidth = 5;
+params.WidthInches = 7.0;
+params.LineWidth = 3;
 params.MarkerSize = 30;
 
 % Execute samples
@@ -57,5 +58,5 @@ arrangeResizeFigures()
 % arrangeResizeFigures(PositionMargin=[50, 100, 25, 50])
 % arrangeResizeFigures(Monitor=2)
 % arrangeResizeFigures(ExportDir="fig")
-% arrangeResizeFigures(ExportParams=params)
+arrangeResizeFigures(ExportParams=params)
 % arrangeResizeFigures(FigureNumbers=figNums, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
