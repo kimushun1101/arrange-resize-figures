@@ -31,8 +31,9 @@ function arrangeResizeFigures(options)
 %   >> arrangeResizeFigures(FigureNumbers=figNums, Division=[4,3], PositionMargin=[50, 100, 25, 50], Monitor=2, ExportDir='fig', ExportParams=params)
 %
 %% 
-% Sample scripts with some figures are <./sampleScript.m sampleScript.m> or 
-% <./sampleLiveScript.mlx sampleLiveScript.mlx>
+% Sample scripts with some figures are <./sampleScriptOfArrangeResizeFigures.m 
+% sampleScriptOfArrangeResizeFigures.m> or <./sampleLiveScriptOfArrangeResizeFigures.mlx 
+% sampleLiveScriptOfArrangeResizeFigures.mlx>
 %% Website
 % A more detailed description is available on GitHub : <https://github.com/kimushun1101/resize-and-arrange-figures 
 % https://github.com/kimushun1101/resize-and-arrange-figures>
