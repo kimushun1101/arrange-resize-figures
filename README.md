@@ -51,7 +51,7 @@ If you have any requests, please contact us via [GitHub issues](https://github.c
 ### Command examples
 
 After preparing some figures, run the following command or script.
-A sample script including preparation is [sampleScriptOfArrangeResizeFigures.m](https://github.com/kimushun1101/arrange-resize-figures/blob/main/sampleScriptOfArrangeResizeFigures.m).
+A sample script including preparation is [sampleScriptOfArrangeResizeFigures.m](./sampleScriptOfArrangeResizeFigures.m).
 
 Basic
 ```
