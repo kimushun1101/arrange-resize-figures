@@ -53,8 +53,10 @@ end
 % Set Figures
 allFigures = findall(0,'Type','figure');
 notEmptyFigures = allFigures(~arrayfun(@(f) strcmp(f.Tag, 'EmbeddedFigure_Internal'), allFigures));
-[~, sortedIndices] = sort(arrayfun(@(f) f.Number, notEmptyFigures));
-applyFigures = notEmptyFigures(sortedIndices);
+hasNumberFigures = notEmptyFigures(arrayfun(@(f) ~isempty(f.Number), notEmptyFigures));
+[~, sortedIndices] = sort(arrayfun(@(f) f.Number, hasNumberFigures));
+applyFigures = hasNumberFigures(sortedIndices);
+
 if numel(options.FigureNumbers) > 0
     applyFigures = applyFigures(ismember([applyFigures.Number], options.FigureNumbers));
 end
